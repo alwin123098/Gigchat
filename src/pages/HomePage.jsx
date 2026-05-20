@@ -20,25 +20,39 @@ export default function HomePage({ Avatar, formatRelativeTime }) {
     selectFreelancer
   } = useApp();
   const [drafts, setDrafts] = useState({});
+  const isClient = currentUser.type === "client";
 
   const filteredJobs =
     activeSkill === "All" ? jobs : jobs.filter((job) => job.skill === activeSkill);
+  const clientJobs = filteredJobs.filter((job) => job.clientId === currentUser.id);
+  const freelancerJobs = filteredJobs.filter((job) => job.clientId !== currentUser.id);
 
   return (
     <div className="page-grid">
       <section className="page-column">
         <div className="hero card">
           <div>
-            <p className="eyebrow">Live feed</p>
-            <h3>Public job requests updating in real time</h3>
+            <p className="eyebrow">{isClient ? "Client section" : "Freelancer section"}</p>
+            <h3>
+              {isClient
+                ? "Post jobs and manage incoming freelancer replies"
+                : "Reply to client job requests in the public feed"}
+            </h3>
             <p>
-              Freelancers pitch directly in-thread. Clients shortlist fast, fund escrow, and move
-              the project into private delivery chat.
+              {isClient
+                ? "Your posts stay public until you select one freelancer and move the deal into private chat."
+                : "Pitch directly in-thread with a fast intro. Once selected, the conversation moves into private chat."}
             </p>
           </div>
-          <Link to="/post-job" className="primary-button">
-            Post a new job
-          </Link>
+          {isClient ? (
+            <Link to="/post-job" className="primary-button">
+              Client: Post a new job
+            </Link>
+          ) : (
+            <a href="#freelancer-feed" className="primary-button">
+              Freelancer: Jump to reply feed
+            </a>
+          )}
         </div>
 
         <div className="filter-bar card">
@@ -54,14 +68,34 @@ export default function HomePage({ Avatar, formatRelativeTime }) {
         </div>
 
         <div className="feed-list">
-          {filteredJobs.map((job) => {
+          {isClient && (
+            <section className="dashboard-section">
+              <div className="section-heading">
+                <h3>Your client posts</h3>
+                <span>{clientJobs.length} jobs</span>
+              </div>
+              {clientJobs.length === 0 && (
+                <div className="empty-state card">
+                  <strong>No posts yet.</strong>
+                  <p>Create your first client job post to start getting freelancer replies.</p>
+                </div>
+              )}
+            </section>
+          )}
+
+          {(isClient ? clientJobs : freelancerJobs).map((job) => {
             const client = users.find((user) => user.id === job.clientId);
             const isOwner = currentUser.id === client.id;
-            const canReply = currentUser.type === "freelancer" && !isOwner && !job.selectedFreelancerId;
+            const canReply =
+              currentUser.type === "freelancer" && !isOwner && !job.selectedFreelancerId;
             const selectedFreelancer = users.find((user) => user.id === job.selectedFreelancerId);
 
             return (
-              <article key={job.id} className="job-card card">
+              <article
+                key={job.id}
+                id={!isClient ? "freelancer-feed" : undefined}
+                className="job-card card"
+              >
                 <div className="job-header">
                   <div className="user-inline">
                     <Avatar user={client} />
@@ -122,7 +156,7 @@ export default function HomePage({ Avatar, formatRelativeTime }) {
                               className="secondary-button"
                               onClick={() => selectFreelancer(job.id, freelancer.id)}
                             >
-                              Select
+                              Client: Select freelancer
                             </button>
                           )}
                         </div>
@@ -159,7 +193,7 @@ export default function HomePage({ Avatar, formatRelativeTime }) {
                         placeholder='Write a direct pitch, for example "I can do this"'
                       />
                       <button className="primary-button" type="submit">
-                        Reply in thread
+                        Freelancer: Reply to this job
                       </button>
                     </form>
                   )}
@@ -171,6 +205,27 @@ export default function HomePage({ Avatar, formatRelativeTime }) {
       </section>
 
       <aside className="side-column">
+        <div className="card spotlight-card">
+          <p className="eyebrow">{isClient ? "Client workflow" : "Freelancer workflow"}</p>
+          <ol className="steps-list">
+            {isClient ? (
+              <>
+                <li>Post a job from the client section.</li>
+                <li>Watch freelancer replies arrive on your post.</li>
+                <li>Select one freelancer and move to private chat.</li>
+                <li>Fund escrow and release payment after completion.</li>
+              </>
+            ) : (
+              <>
+                <li>Browse open client requests in the freelancer section.</li>
+                <li>Reply publicly with your offer and experience.</li>
+                <li>Wait for the client to select your reply.</li>
+                <li>Deliver work in private chat and collect payment.</li>
+              </>
+            )}
+          </ol>
+        </div>
+
         <div className="card spotlight-card">
           <p className="eyebrow">How GigChat works</p>
           <ol className="steps-list">
