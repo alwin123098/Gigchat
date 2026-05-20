@@ -1,0 +1,626 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  color-scheme: light;
+  --bg: #f5efe6;
+  --panel: rgba(255, 251, 247, 0.8);
+  --panel-strong: #fffaf5;
+  --line: rgba(58, 39, 30, 0.12);
+  --text: #2f241f;
+  --muted: #6d5a4f;
+  --brand: #ff6b3d;
+  --brand-dark: #e14f24;
+  --accent: #173b7a;
+  --success: #159a69;
+  --shadow: 0 24px 80px rgba(44, 22, 9, 0.12);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Instrument Sans", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 145, 96, 0.24), transparent 24%),
+    radial-gradient(circle at top right, rgba(23, 59, 122, 0.18), transparent 26%),
+    linear-gradient(180deg, #f7f1e8 0%, #f0e6dc 100%);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  padding: 24px;
+  border-right: 1px solid var(--line);
+  background: rgba(255, 248, 241, 0.78);
+  backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+}
+
+.brand-block {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.brand-mark {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--brand), #ffb067);
+  color: white;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+}
+
+.brand-block h1,
+.topbar h2,
+.hero h3,
+.job-meta h3,
+.card h3 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.brand-block p,
+.topbar p,
+.hero p,
+.card p,
+.job-meta p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.nav-links {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.nav-links a,
+.account-option,
+.current-user,
+.filter-pill,
+.icon-button,
+.primary-button,
+.secondary-button,
+.text-link {
+  transition: 160ms ease;
+}
+
+.nav-links a {
+  padding: 14px 16px;
+  border-radius: 16px;
+  color: var(--muted);
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  background: rgba(255, 107, 61, 0.12);
+  color: var(--text);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.account-switcher {
+  padding: 18px;
+}
+
+.section-heading,
+.user-inline,
+.job-header,
+.job-foot,
+.reply-actions,
+.participant-strip,
+.message-actions,
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.account-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  padding: 10px 0;
+  cursor: pointer;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.account-option:last-child {
+  border-bottom: 0;
+}
+
+.account-option.active {
+  color: var(--accent);
+}
+
+.account-option small,
+.current-user span,
+.user-inline span,
+.job-time,
+.job-deadline,
+.notification-item span,
+.notification-row span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.main-panel {
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.current-user {
+  display: flex;
+  gap: 12px;
+  padding: 10px 14px;
+  min-width: 180px;
+}
+
+.avatar {
+  border-radius: 999px;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.avatar-small {
+  width: 36px;
+  height: 36px;
+}
+
+.avatar-medium {
+  width: 48px;
+  height: 48px;
+}
+
+.avatar-large {
+  width: 84px;
+  height: 84px;
+  font-size: 1.5rem;
+}
+
+.notification-bell {
+  position: relative;
+}
+
+.icon-button {
+  position: relative;
+  border: 0;
+  background: var(--panel);
+  border-radius: 18px;
+  padding: 12px 14px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.icon-button strong {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 0.72rem;
+}
+
+.notification-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 320px;
+  padding: 16px;
+  z-index: 10;
+}
+
+.notification-item,
+.notification-row {
+  display: block;
+  padding: 12px;
+  border-radius: 18px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.notification-item.unread,
+.notification-row.unread {
+  border: 1px solid rgba(255, 107, 61, 0.24);
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
+  gap: 24px;
+}
+
+.single-page {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.page-column,
+.side-column,
+.feed-list,
+.stat-grid,
+.notification-list,
+.status-list {
+  display: grid;
+  gap: 18px;
+}
+
+.hero,
+.filter-bar,
+.job-card,
+.spotlight-card,
+.stat-card,
+.form-card,
+.profile-hero,
+.chat-header-card,
+.chat-stream,
+.deal-panel {
+  padding: 22px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: end;
+  background:
+    linear-gradient(135deg, rgba(255, 107, 61, 0.92), rgba(255, 182, 116, 0.85)),
+    var(--panel);
+  color: white;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero .eyebrow {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-pill {
+  border: 0;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 11px 16px;
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.filter-pill.active,
+.filter-pill:hover,
+.primary-button:hover,
+.secondary-button:hover,
+.text-link:hover,
+.icon-button:hover {
+  transform: translateY(-1px);
+}
+
+.filter-pill.active {
+  background: var(--accent);
+  color: white;
+}
+
+.job-card {
+  display: grid;
+  gap: 18px;
+}
+
+.job-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px;
+  gap: 18px;
+}
+
+.budget-box {
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(23, 59, 122, 0.08);
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+
+.budget-box strong,
+.stat-grid strong,
+.deal-metrics strong {
+  font-size: 1.5rem;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.tag-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tag,
+.file-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.thread-block,
+.reply-form,
+.job-form,
+.rating-form {
+  display: grid;
+  gap: 14px;
+}
+
+.reply-card,
+.selected-banner,
+.review-card,
+.list-row {
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.56);
+  border: 1px solid var(--line);
+}
+
+.selected-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent);
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  border: 1px solid rgba(85, 54, 38, 0.12);
+  background: rgba(255, 255, 255, 0.84);
+  padding: 14px 16px;
+  border-radius: 16px;
+  outline: none;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+  border-color: rgba(23, 59, 122, 0.4);
+  box-shadow: 0 0 0 4px rgba(23, 59, 122, 0.08);
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.primary-button,
+.secondary-button {
+  border: 0;
+  cursor: pointer;
+  border-radius: 16px;
+  padding: 13px 18px;
+  font-weight: 600;
+}
+
+.primary-button {
+  background: var(--accent);
+  color: white;
+}
+
+.secondary-button {
+  background: rgba(255, 107, 61, 0.12);
+  color: var(--brand-dark);
+}
+
+.text-link {
+  color: var(--accent);
+}
+
+.steps-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  display: grid;
+  gap: 10px;
+}
+
+.profile-hero {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.link-list {
+  display: grid;
+  gap: 10px;
+}
+
+.link-list a {
+  color: var(--accent);
+}
+
+.stars {
+  color: #f59e0b;
+  letter-spacing: 0.12em;
+}
+
+.chat-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(290px, 0.7fr);
+  gap: 24px;
+}
+
+.chat-stream,
+.message-form,
+.file-form,
+.deal-metrics {
+  display: grid;
+  gap: 14px;
+}
+
+.chat-bubble {
+  padding: 14px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--line);
+}
+
+.chat-bubble.mine {
+  background: rgba(23, 59, 122, 0.08);
+}
+
+.deal-metrics > div,
+.stat-grid > div {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.56);
+  display: grid;
+  gap: 4px;
+}
+
+.status-list > div {
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px dashed rgba(58, 39, 30, 0.2);
+  color: var(--muted);
+}
+
+.status-list > div.status-active {
+  border-style: solid;
+  border-color: rgba(21, 154, 105, 0.3);
+  background: rgba(21, 154, 105, 0.08);
+  color: var(--success);
+}
+
+.connector {
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+@media (max-width: 1120px) {
+  .app-shell,
+  .page-grid,
+  .chat-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 720px) {
+  .main-panel,
+  .sidebar {
+    padding: 16px;
+  }
+
+  .topbar,
+  .hero,
+  .profile-hero,
+  .job-meta {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .topbar-actions,
+  .job-foot,
+  .selected-banner,
+  .reply-actions,
+  .participant-strip,
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .notification-dropdown {
+    width: min(320px, calc(100vw - 32px));
+    right: 0;
+  }
+}
